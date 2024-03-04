@@ -1,0 +1,30 @@
+
+resource "aws_internet_gateway" "igw_<###ITEM_NAME###>" {
+  vpc_id = "${aws_vpc.vpc_<###PARAM_1###>.id}"
+
+  tags = {
+    Name = "igw_<###ITEM_NAME###>"
+  }
+}
+
+
+#--------------Création de la table de routage----------------
+
+
+resource "aws_route_table" "rtb_<###ITEM_NAME###>" {
+  vpc_id = "${aws_vpc.vpc_<###PARAM_1###>.id}"
+
+  route {
+    cidr_block = "0.0.0.0/0"
+    gateway_id = "${aws_internet_gateway.igw_<###ITEM_NAME###>.id}"
+  }
+
+
+}
+
+
+#------------ elastic ip 
+
+//ressource "aws_eip" "eip_<###ITEM_NAME###>" {
+
+//}
